@@ -17,7 +17,6 @@ jobs:
           MIRROR_PAT: ${{ secrets.MIRROR_PAT }}
           MIRROR_REPO: ${{ secrets.MIRROR_REPO }}
         run: |
-          echo "MIRROR_REPO length: ${#MIRROR_REPO}"
-          echo "MIRROR_REPO starts with: ${MIRROR_REPO:0:10}"
+          MIRROR_REPO="$(echo -n "${MIRROR_REPO}" | tr -d '[:space:]')"
           git remote add mirror https://x-access-token:${MIRROR_PAT}@${MIRROR_REPO}
           git push mirror main
