@@ -1,12 +1,33 @@
-# apple-keychain-auth · v0.1.0
+# apple-keychain-auth
 
-> **Recommended:** Install this skill through the [AI Foundry Marketplace](https://github.com/Now-AI-Foundry/marketplace-cc-skills#installing-this-marketplace) — it bundles all AI Foundry skills together. Just tell Claude Code: _"Install the AI Foundry marketplace"_ and it will handle the rest.
+![macOS](https://img.shields.io/badge/platform-macOS-lightgrey) ![version](https://img.shields.io/badge/version-v0.1.0-blue) ![license](https://img.shields.io/badge/license-MIT-green)
 
 **Keep credentials out of your codebase, your shell history, and your chat.**
 
 A Claude Code skill that retrieves credentials from macOS Keychain and puts them to work immediately — no `.env` files, no plaintext secrets in chat, no tokens leaking into `~/.zsh_history`.
 
 Every time credentials come up in a session, this skill nudges Claude toward Keychain. Over time, your Claude Code environment becomes progressively more secure without any single big migration effort. The `auth_unset` function clears exported vars from shell memory after use, minimizing even the in-session exposure window.
+
+---
+
+## Contents
+
+- [Requirements](#requirements)
+- [How it works](#how-it-works)
+- [Exported variables](#exported-variables)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Adding credentials to Keychain](#adding-credentials-to-keychain)
+- [Why this matters](#why-this-matters)
+- [JSON parsing](#json-parsing)
+- [License](#license)
+
+---
+
+## Requirements
+
+- macOS (uses the built-in `security` CLI)
+- Claude Code
 
 ---
 
@@ -43,14 +64,6 @@ Claude: [invokes apple-keychain-auth for gpinst01.service-now.com]
 ---
 
 ## Installation
-
-### Via AI Foundry Marketplace (recommended)
-
-```
-/plugin install apple-keychain-auth@marketplace-cc-skills
-```
-
-### Manual
 
 ```bash
 git clone https://github.com/dalestubblefield/skill-apple-keychain-auth.git \
@@ -114,11 +127,12 @@ Claude Code caches conversation context in `~/.claude/projects/`. Any credential
 
 ---
 
-## Requirements
-
-- macOS (uses the built-in `security` CLI)
-- Claude Code
-
 ## JSON parsing
 
 Uses the first available tool: `jq` → `python3` → naive `grep`/`sed`. No hard dependencies beyond what ships with macOS.
+
+---
+
+## License
+
+MIT — do whatever you want with it.
