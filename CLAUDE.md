@@ -31,4 +31,4 @@ auth_unset
 
 ## Versioning
 
-Repo is a personal skill — no formal version bumping. Changes go directly to `main`.
+Version is tracked as `vX.Y.Z` in the `# Title · vX.Y.Z` line of `README.md`. Bump manually when making meaningful changes.

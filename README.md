@@ -1,4 +1,4 @@
-# apple-keychain-auth
+# apple-keychain-auth · v0.1.0
 
 A Claude Code skill that retrieves credentials from macOS Keychain and classifies them for immediate use in API calls — no `.env` files, no shell history exposure, no plaintext secrets in chat.
 
