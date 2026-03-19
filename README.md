@@ -34,8 +34,8 @@ Every time credentials come up in a session, this skill nudges Claude toward Key
 ## How it works
 
 ```
-You: "Deploy to gpinst01"
-Claude: [invokes apple-keychain-auth for gpinst01.service-now.com]
+You: "Deploy to example"
+Claude: [invokes apple-keychain-auth for example.service-now.com]
         → finds internet-password in Keychain
         → exports AUTH_USER, AUTH_PASS, AUTH_TYPE
         → runs deployment
@@ -99,7 +99,7 @@ auth_unset
 
 **Via Keychain Access app:**
 1. File → New Internet Password Item
-2. Set **Where** to the hostname (e.g. `gpinst01.service-now.com`)
+2. Set **Where** to the hostname (e.g. `example.service-now.com`)
 3. Fill in Account and Password
 
 **Via terminal:**
