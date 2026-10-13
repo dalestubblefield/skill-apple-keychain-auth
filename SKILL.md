@@ -32,13 +32,13 @@ Even with `run-with-auth.sh`, credential values exist briefly in process memory 
 
 ### Preferred: `run-with-auth.sh` (safe for Claude Code)
 
-Fetches credentials internally and executes the command directly. Credential values never appear in Claude's tool output, tool results, or session log files.
+Fetches credentials internally and executes the command directly. The script never prints credential values; they reach Claude's tool output only if the command it runs prints them.
 
 ```bash
 ~/.claude/skills/apple-keychain-auth/run-with-auth.sh <hostname-or-url> [account] -- <command> [args...]
 ```
 
-**For `curl`**, auth flags are injected automatically — do not include `-u` or `-H Authorization`:
+**For `curl`**, auth flags are injected automatically — do not include `-u` or `-H Authorization`. The script refuses the request unless every URL is `https://` and its host is the credential host or a subdomain of it. It also refuses `-v`, `--trace`, `-K`/`--config`, `--proto*` and `--location-trusted`, and `-L` when the credential is an API key. Never work around a refusal by switching to the `eval` pattern below.
 
 ```bash
 # ServiceNow REST API (basic auth injected automatically)
@@ -49,7 +49,8 @@ Fetches credentials internally and executes the command directly. Credential val
 ~/.claude/skills/apple-keychain-auth/run-with-auth.sh github.com -- \
   curl -s https://api.github.com/user
 
-# Any other tool: credentials available as AUTH_PASS / AUTH_TOKEN in subprocess env
+# Any other tool: credentials available as AUTH_PASS / AUTH_TOKEN in subprocess env.
+# Do not run a command that prints its environment or these variables.
 ~/.claude/skills/apple-keychain-auth/run-with-auth.sh example.service-now.com -- \
   now-sdk deploy
 ```

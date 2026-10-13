@@ -21,6 +21,12 @@ This repo contains a single Claude Code skill. The skill files are:
 
 If credentials are in **1Password** rather than macOS Keychain, use `use-1password-cli` (`~/.claude/skills/use-1password-cli/`). Both skills export identical `AUTH_*` variables.
 
+## run-with-auth.sh guarantees
+
+- curl requests go only to the credential host or a subdomain of it, over https. There is no flag or environment variable to widen this; do not add one.
+- Inherited `AUTH_*` values are cleared before the lookup, and a failed lookup or unknown `AUTH_TYPE` stops the run.
+- curl flags that print request headers are refused. For non-curl commands the child process still receives the credentials and can print them; only `env`, `printenv`, `echo` and `printf` are refused outright.
+
 ## Known limitation
 
 Credential values exist in process memory during `run-with-auth.sh` execution and are visible to root via `ps`. Acceptable on a personal dev machine; not appropriate for shared/multi-user systems.
