@@ -25,11 +25,13 @@ If credentials are in **1Password** rather than macOS Keychain, use `use-1passwo
 
 - curl requests go only to the credential host or a subdomain of it, over https. There is no flag or environment variable to widen this; do not add one.
 - Inherited `AUTH_*` values are cleared before the lookup, and a failed lookup or unknown `AUTH_TYPE` stops the run.
-- curl flags that print request headers are refused. For non-curl commands the child process still receives the credentials and can print them; only `env`, `printenv`, `echo` and `printf` are refused outright.
+- curl options are an allowlist, matched exactly, because curl accepts abbreviated long options and a denylist cannot hold. Add an option only after checking it cannot print request headers, change where the request goes, or weaken TLS.
+- The credential reaches curl through `--config` on a pipe, never the command line, and `-q` keeps `~/.curlrc` out.
+- For non-curl commands the child process still receives the credentials and can print them. Refusing `env`, `printenv`, `echo` and `printf` catches slips; it is not a boundary.
 
 ## Known limitation
 
-Credential values exist in process memory during `run-with-auth.sh` execution and are visible to root via `ps`. Acceptable on a personal dev machine; not appropriate for shared/multi-user systems.
+For curl the credential is passed on a pipe and does not appear in the process list. For any other command it is placed in the child's environment, which root and the same user can read while it runs. Acceptable on a personal dev machine; not appropriate for shared/multi-user systems.
 
 ## Testing
 

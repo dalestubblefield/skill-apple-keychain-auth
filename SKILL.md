@@ -38,7 +38,7 @@ Fetches credentials internally and executes the command directly. The script nev
 ~/.claude/skills/apple-keychain-auth/run-with-auth.sh <hostname-or-url> [account] -- <command> [args...]
 ```
 
-**For `curl`**, auth flags are injected automatically — do not include `-u` or `-H Authorization`. The script refuses the request unless every URL is `https://` and its host is the credential host or a subdomain of it. It also refuses `-v`, `--trace`, `-K`/`--config`, `--proto*` and `--location-trusted`, and `-L` when the credential is an API key. Never work around a refusal by switching to the `eval` pattern below.
+**For `curl`**, auth flags are injected automatically — do not include `-u` or `-H Authorization`. The script refuses the request unless every URL is `https://` and its host is the credential host or a subdomain of it. Only these curl options are accepted, spelled in full: `-s -S -f -i -g -G -I -L -X -H -d -o -w -m -F -A` and `--silent --show-error --fail --fail-with-body --include --globoff --get --head --compressed --no-progress-meter --location --request --header --data --data-raw --data-binary --data-urlencode --json --output --write-out --max-time --connect-timeout --form --user-agent --retry --url`. `-L` is refused for `api_key` and `token` credentials. Never work around a refusal by switching to the `eval` pattern below.
 
 ```bash
 # ServiceNow REST API (basic auth injected automatically)
