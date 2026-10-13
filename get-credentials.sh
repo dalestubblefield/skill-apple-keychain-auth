@@ -12,7 +12,7 @@
 #   auth_unset  (exported as a shell function alongside the vars)
 #
 # Examples:
-#   eval "$(get-credentials.sh gpinst01.service-now.com)"
+#   eval "$(get-credentials.sh example.service-now.com)"
 #   eval "$(get-credentials.sh https://api.example.com admin@example.com)"
 #   eval "$(get-credentials.sh github.com)"   # checks generic password too
 

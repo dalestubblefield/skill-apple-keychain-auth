@@ -1,6 +1,6 @@
 # apple-keychain-auth
 
-![macOS](https://img.shields.io/badge/platform-macOS-lightgrey) ![version](https://img.shields.io/badge/version-v0.1.0-blue) ![license](https://img.shields.io/badge/license-MIT-green)
+![macOS](https://img.shields.io/badge/platform-macOS-lightgrey) ![version](https://img.shields.io/badge/version-v1.2.0-blue) ![license](https://img.shields.io/badge/license-MIT-green)
 
 **Keep credentials out of your codebase, your shell history, and your chat.**
 
@@ -136,3 +136,11 @@ Uses the first available tool: `jq` → `python3` → naive `grep`/`sed`. No har
 ## License
 
 MIT — do whatever you want with it.
+
+## Version Milestones
+
+Major milestones only, newest first. Not a full changelog: each line marks a version worth remembering.
+
+- **v1.2.0** (2026-07-22): Split SKILL.md into a lean core file plus REFERENCE.md for rarely-needed detail (credential-type detection, entry types, JSON parsing fallback, multi-account handling, token expiry, adding credentials, security rules, decline-handling). Cuts per-invocation context cost further after the v1.1.0 trigger fix.
+- **v1.1.0** (2026-07-22): Tightened SKILL.md trigger description to reduce over-firing on generic auth/curl/rest-api mentions; each invocation costs a fixed SKILL.md token load, so frequent unnecessary triggers had been a top token consumer for some users.
+- **v1.0.0** (2026-05-04): Version tracking begins. Baseline milestone for this skill; future behavior changes will add a line here.
